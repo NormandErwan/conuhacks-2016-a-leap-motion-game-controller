@@ -16,8 +16,6 @@ public class MagickaLeapMotionListener extends Listener {
     public void onFrame(Controller controller) {
     	Frame frame = controller.frame();
     	
-    	System.out.println(frame.gestures().count());
-    	
     	for (Gesture gesture : frame.gestures()) {
     		switch (gesture.type()) {
             	case TYPE_SWIPE:

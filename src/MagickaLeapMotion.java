@@ -4,10 +4,16 @@ import com.leapmotion.leap.*;
 
 public class MagickaLeapMotion {
 	
-	public static void main(String[] args) throws AWTException {
+	public static void main(String[] args) throws AWTException, IOException {
+		// Launch the robot and the game
+		MagickaRobot magickaRobot = new MagickaRobot();
+    	
         // Create a sample listener and controller
-        Listener listener = new MagickaLeapMotionListener(new MagickaRobot());
+        Listener listener = new MagickaLeapMotionListener(magickaRobot);
         Controller controller = new Controller();
+        
+        // Allow to get frame when the application is in background
+        controller.setPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
 
         // Have the sample listener receive events from the controller
         controller.addListener(listener);
