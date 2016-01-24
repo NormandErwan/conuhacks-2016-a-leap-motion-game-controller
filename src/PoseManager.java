@@ -25,7 +25,6 @@ public class PoseManager {
 		Integer keyPoseDetected = null;
 		for (Map.Entry<Integer, Pose> entry : keyPoses.entrySet()) {
 			Double matchValue = entry.getValue().match(pose);
-			System.out.println(matchValue);
 			if (matchValue >= matchThreshold) {
 				keyPoseDetected = entry.getKey();
 				break;
