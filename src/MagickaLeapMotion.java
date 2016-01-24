@@ -5,8 +5,10 @@ import com.leapmotion.leap.*;
 public class MagickaLeapMotion {
 	
 	public static void main(String[] args) throws AWTException, IOException {
-		// Launch the robot and the game
-		MagickaRobot magickaRobot = new MagickaRobot();
+	//Launch the GUI
+	    new Interface();
+	// Launch the robot and the game
+	MagickaRobot magickaRobot = new MagickaRobot();
     	
         // Create a sample listener and controller
         Listener listener = new MagickaLeapMotionListener(magickaRobot);

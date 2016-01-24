@@ -21,11 +21,11 @@ public class MagickaRobot {
 		if (lines.isEmpty()) {
 			throw new IOException(magickaPathError);
 		} else {
-			try {
+			/*try {
 				Runtime.getRuntime().exec(lines.get(0));
 			} catch (IOException e) {
 				throw new IOException(magickaPathError);
-			}
+			}*/
 		}
 		
 		this.robot = new Robot();
