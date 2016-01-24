@@ -23,10 +23,25 @@ public class Pose {
 	        Vector transformedPosition = handTransform.transformPoint(finger.tipPosition());
 	        Vector transformedDirection = handTransform.transformDirection(finger.direction());
 	        
-	        fingerTransformedPositionsAndDirections.add(transformedPosition);
-	        fingerTransformedPositionsAndDirections.add(transformedDirection);
+	        fingerVectors.add(transformedPosition);
+	        fingerVectors.add(transformedDirection);
 	    }
 	}
 	
-	private List<Vector> fingerTransformedPositionsAndDirections;
+	public float match(Pose pose) {
+		float minMatch = -1;
+		
+		for (int i = 0, s = fingerVectors.size(); i < s; i++) {
+			float matchi = fingerVectors.get(i).normalized().dot(pose.getFingerVectors().get(i).normalized());
+			minMatch = Math.min(matchi, minMatch);
+		}
+		
+		return minMatch;
+	}
+	
+	public List<Vector> getFingerVectors() {
+		return fingerVectors;
+	}
+	
+	private List<Vector> fingerVectors;
 }
