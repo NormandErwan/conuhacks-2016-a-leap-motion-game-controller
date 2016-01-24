@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class PoseManager {
 	
-	public static Double matchThreshold = 0.65; 
+	public static Double matchThreshold = 0.90; 
 	
 	public void setLeapMotionListener(LeapMotionListener leapMotionListener) {
 		this.newPoseKey = null;
@@ -25,6 +25,7 @@ public class PoseManager {
 		Integer keyPoseDetected = null;
 		for (Map.Entry<Integer, Pose> entry : keyPoses.entrySet()) {
 			Double matchValue = entry.getValue().match(pose);
+			System.out.println(matchValue);
 			if (matchValue >= matchThreshold) {
 				keyPoseDetected = entry.getKey();
 				break;
