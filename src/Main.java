@@ -1,6 +1,7 @@
 import java.awt.AWTException;
 import java.io.IOException;
 import com.leapmotion.leap.*;
+import com.sun.glass.events.KeyEvent;
 
 public class Main {
 
@@ -26,12 +27,25 @@ public class Main {
 		controller.addListener(leapMotionListener);
 
 		// Keep this process running until Enter is pressed
+		new java.util.Timer().schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+
+		        		poseManager.prepareNewPose(KeyEvent.VK_Q);
+		            }
+		        }, 
+		        2000 
+		);
+		
 		System.out.println("Press Enter to quit...");
 		try {
-			System.in.read();
+			int inChar = System.in.read();
+			System.out.println(inChar);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("quit");
 
 		// Remove the sample listener when done
 		controller.removeListener(leapMotionListener);

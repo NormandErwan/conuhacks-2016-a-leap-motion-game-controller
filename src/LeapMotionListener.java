@@ -1,6 +1,6 @@
-import java.awt.event.KeyEvent;
-
-import com.leapmotion.leap.*;
+import com.leapmotion.leap.Controller;
+import com.leapmotion.leap.Frame;
+import com.leapmotion.leap.Listener;
 
 public class LeapMotionListener extends Listener {
 	
@@ -13,15 +13,19 @@ public class LeapMotionListener extends Listener {
     	Frame frame = controller.frame();
     	
     	// Capture new pose
-    	if (capturePose) {
+    	if (capturePose == true) {
     		capturePose = false;
     		
     		// Get the new pose
-    		Pose pose = new Pose(frame.hands());
-    		poseManager.createFuturePose(pose);
+    		Pose pose = new Pose(frame);
+    		poseManager.createNewPose(pose);
     	}
     	else { // Or Match poses
-
+    		Pose pose = new Pose(frame);
+    		Integer poseKey = poseManager.poseDetection(pose);
+    		if (poseKey != null) {
+    			gameRobot.sendKey(poseKey);
+    		}
     	}
     }
     
@@ -30,6 +34,6 @@ public class LeapMotionListener extends Listener {
     }
     
     private GameRobot gameRobot;
-    private boolean capturePose;
+    private Boolean capturePose;
     private PoseManager poseManager;
 }

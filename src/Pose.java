@@ -1,16 +1,19 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import com.leapmotion.leap.Finger;
+import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
-import com.leapmotion.leap.HandList;
 import com.leapmotion.leap.Matrix;
 import com.leapmotion.leap.Vector;
 
 public class Pose {
 
-	public Pose(HandList hands) {
+	public Pose(Frame frame) {
+		this.fingerVectors = new ArrayList<Vector>();
+		
 		// Get finger relative position and directions
-		Hand rightHand = hands.rightmost(); // TODO : need to choose which one
+		Hand rightHand = frame.hands().rightmost(); // TODO : need to choose which one
 
 	    Vector handXBasis =  rightHand.palmNormal().cross(rightHand.direction()).normalized();
 	    Vector handYBasis = rightHand.palmNormal().opposite();
@@ -18,7 +21,7 @@ public class Pose {
 	    Vector handOrigin =  rightHand.palmPosition();
 	    Matrix handTransform = new Matrix(handXBasis, handYBasis, handZBasis, handOrigin);
 	    handTransform = handTransform.rigidInverse();
-
+	    
 	    for (Finger finger : rightHand.fingers()) {
 	        Vector transformedPosition = handTransform.transformPoint(finger.tipPosition());
 	        Vector transformedDirection = handTransform.transformDirection(finger.direction());
@@ -28,11 +31,11 @@ public class Pose {
 	    }
 	}
 	
-	public float match(Pose pose) {
-		float minMatch = -1;
+	public Double match(Pose pose) {
+		Double minMatch = -1.0;
 		
 		for (int i = 0, s = fingerVectors.size(); i < s; i++) {
-			float matchi = fingerVectors.get(i).normalized().dot(pose.getFingerVectors().get(i).normalized());
+			Double matchi = (double) fingerVectors.get(i).normalized().dot(pose.getFingerVectors().get(i).normalized());
 			minMatch = Math.min(matchi, minMatch);
 		}
 		

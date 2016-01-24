@@ -31,10 +31,10 @@ public class GameRobot {
 		this.robot = new Robot();
 	}
 	
-	public void sendKey(int keyEvent) {
-		robot.keyPress(keyEvent);
+	public void sendKey(int key) {
+		robot.keyPress(key);
         robot.delay(100);
-        robot.keyRelease(keyEvent);
+        robot.keyRelease(key);
 	}
 	
 	private Robot robot;
