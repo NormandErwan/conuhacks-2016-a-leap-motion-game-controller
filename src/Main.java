@@ -1,18 +1,17 @@
 import java.awt.AWTException;
 import java.io.IOException;
 import com.leapmotion.leap.*;
-import com.sun.glass.events.KeyEvent;
 
 public class Main {
 
 	public static void main(String[] args) throws AWTException, IOException {
 		PoseManager poseManager = new PoseManager();
-		
-		//Launch the GUI
-		new Interface(poseManager);
-		
+
 		// Launch the robot and the game
 		GameRobot gameRobot = new GameRobot();
+		
+		//Launch the GUI
+		new Interface(poseManager, gameRobot);
 
 		// Create a sample listener and controller
 		LeapMotionListener leapMotionListener = new LeapMotionListener(gameRobot, poseManager);
@@ -27,40 +26,12 @@ public class Main {
 		controller.addListener(leapMotionListener);
 
 		// Keep this process running until Enter is pressed
-		System.out.println("Prepare Arcane (S)");
-		new java.util.Timer().schedule( 
-		        new java.util.TimerTask() {
-		            @Override
-		            public void run() {
-		        		poseManager.prepareNewPose(KeyEvent.VK_S);
-		        		System.out.println("Arcane (S) acquired");
-		        		System.out.println("Prepare Rock (D)");
-		        		
-		        		new java.util.Timer().schedule( 
-		        		        new java.util.TimerTask() {
-		        		            @Override
-		        		            public void run() {
-		        		        		poseManager.prepareNewPose(KeyEvent.VK_D);
-		        		        		System.out.println("Rock (D) acquired");
-		        		        		System.out.println("Press Enter to quit...");
-		        		            }
-		        		        }, 
-		        		        2000 
-		        		);
-		            }
-		        }, 
-		        2000 
-		);
-
-		
-		
+		System.out.println("Press Enter to quit...");
 		try {
-			int inChar = System.in.read();
-			System.out.println(inChar);
+			System.in.read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("quit");
 
 		// Remove the sample listener when done
 		controller.removeListener(leapMotionListener);
