@@ -18,7 +18,7 @@ public class PoseManager {
 	}
 	
 	public void createNewPose(Pose pose) {
-		System.out.println(pose.toString());
+		keyPoses.put(newPoseKey, pose);
 		newPoseKey = null;
 	}
 	
