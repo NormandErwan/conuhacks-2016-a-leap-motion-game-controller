@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,12 +17,9 @@ public class Interface extends JFrame {
 	private int nbrGestures;
 	private JTextField varGame[];
 	private JTextField JTnbrGesture;
-	private PoseManager poseManager;
 	private JButton[] button;
 
 	Interface(PoseManager poseManager) {
-		this.poseManager = poseManager;
-		
 		top();
 		bot();
 		initUI();
@@ -44,20 +42,13 @@ public class Interface extends JFrame {
 		JTnbrGesture = new JTextField("Nombre Gesture");
 		topPanel.add(JTnbrGesture);
 
-		JTnbrGesture.addActionListener(new listenerNbrGesture());
-
-	}
-	
-	public class listenerNbrGesture implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
+		JTnbrGesture.addActionListener(e -> {
 			nbrGestures = JTnbrGesture.getText().charAt(0)-48; //ascii
 			System.out.println(nbrGestures);
 			mid();
 			//tabKey[0]= varGame.getText().charAt(0);
+		});
 
-		}
 	}
 	
 	public void mid(){
@@ -79,44 +70,26 @@ public class Interface extends JFrame {
 			button[i] = new JButton("Gesture "+ i.toString());
 			midPanel.add(varGame[i]);
 			midPanel.add(button[i]);
-			varGame[i].addActionListener(new listenerChoiceVarGame());
-			button[i].addActionListener(new listenerChoiceGesture());
-		}
-
-	}
-	
-	public class listenerChoiceVarGame implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			for(int g =0 ; g<nbrGestures;g++)
-			{
-				if(e.getSource() == varGame[g])
-				{ 
-					System.out.println(g);
-					System.out.println(varGame[g].getText().charAt(0));
+			varGame[i].addActionListener(e -> {
+				for(int g = 0; g < nbrGestures; g++)
+				{
+					if(e.getSource() == varGame[g])
+					{ 
+						System.out.println(g);
+						System.out.println(varGame[g].getText().charAt(0));
+					}
 				}
-			}
-			//System.out.println(varGame.getText().charAt(0));
-			//tabKey[0]= varGame.getText().charAt(0);
-
-		}
-
-	}
-	
-	public class listenerChoiceGesture implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			for(int g =0 ; g<nbrGestures;g++)
-			{
-				if(e.getSource() == button[g])
-				{ 
-					System.out.println(g);
+			});
+			button[i].addActionListener(e -> {
+				for(int g = 0; g < nbrGestures; g++)
+				{
+					if(e.getSource() == button[g])
+					{ 
+						System.out.println(g);
+					}
 				}
-			}
+			});
 		}
-
 	}
 
 	public void bot(){
@@ -128,27 +101,16 @@ public class Interface extends JFrame {
 		botPanel.add(choixJeu);
 		botPanel.add(jouer);
 
-		choixJeu.addActionListener(new listenerChoiceOfTheGame());
-	}
-
-	public class listenerChoiceOfTheGame implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JFrame fcheminJeu = new JFrame();
+		choixJeu.addActionListener(e -> {
+			Frame fcheminJeu = new JFrame();
 			try {
 				JFileChooser chooser = new JFileChooser();
 				chooser.showOpenDialog(null);
 				File file = chooser.getSelectedFile();
 				pathGame = file.getCanonicalPath();
-
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-
-		}
-
+		});
 	}
 }
