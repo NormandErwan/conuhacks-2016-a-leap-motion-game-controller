@@ -4,16 +4,11 @@ import com.leapmotion.leap.*;
 
 public class LeapMotionListener extends Listener {
 	
-	public LeapMotionListener(GameRobot magickaRobot, PoseManager poseManager) {
-		this.magickaRobot = magickaRobot;
+	public LeapMotionListener(GameRobot gameRobot, PoseManager poseManager) {
+		this.gameRobot = gameRobot;
 		this.poseManager = poseManager;
 	}
 	
-	public void onConnect(Controller controller) {
-        controller.enableGesture(Gesture.Type.TYPE_SWIPE);
-        controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
-    }
-
     public void onFrame(Controller controller) {
     	Frame frame = controller.frame();
     	
@@ -27,15 +22,7 @@ public class LeapMotionListener extends Listener {
     		poseManager.createFuturePose(pose);
     	}
     	else { // Or Match poses
-	    	for (Gesture gesture : frame.gestures()) { // TODO : remove
-	    		switch (gesture.type()) {
-	            	case TYPE_SWIPE:
-	            		magickaRobot.sendKey(KeyEvent.VK_Q);
-	            		break;
-	            	default:
-	            		break;
-	    		}
-	    	}
+
     	}
     }
     
@@ -43,7 +30,7 @@ public class LeapMotionListener extends Listener {
     	capturePose = true;
     }
     
-    private GameRobot magickaRobot;
+    private GameRobot gameRobot;
     private boolean capturePose;
     private PoseManager poseManager;
 }

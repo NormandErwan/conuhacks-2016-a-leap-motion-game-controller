@@ -2,8 +2,8 @@ import java.awt.event.KeyEvent;
 
 public class PoseManager {
 	
-	public void setMagickaLeapMotionListener(LeapMotionListener magickaLeapMotionListener) {
-		this.magickaLeapMotionListener = magickaLeapMotionListener;
+	public void setLeapMotionListener(LeapMotionListener leapMotionListener) {
+		this.leapMotionListener = leapMotionListener;
 	}
 	
 	public void newPoseFromInterface(KeyEvent keyEvent) {
@@ -16,5 +16,5 @@ public class PoseManager {
 	}
 	
 	private KeyEvent futureKeyPose; // remember when asked by the interface
-	private LeapMotionListener magickaLeapMotionListener;
+	private LeapMotionListener leapMotionListener;
 }

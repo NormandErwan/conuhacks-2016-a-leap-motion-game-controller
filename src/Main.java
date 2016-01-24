@@ -11,19 +11,19 @@ public class Main {
 		new Interface(poseManager);
 		
 		// Launch the robot and the game
-		GameRobot magickaRobot = new GameRobot();
+		GameRobot gameRobot = new GameRobot();
 
 		// Create a sample listener and controller
-		LeapMotionListener magickaLeapMotionListener = new LeapMotionListener(magickaRobot, poseManager);
+		LeapMotionListener leapMotionListener = new LeapMotionListener(gameRobot, poseManager);
 		Controller controller = new Controller();
 		
-		poseManager.setMagickaLeapMotionListener(magickaLeapMotionListener);
+		poseManager.setLeapMotionListener(leapMotionListener);
 
 		// Allow to get frame when the application is in background
 		controller.setPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
 
 		// Have the sample listener receive events from the controller
-		controller.addListener(magickaLeapMotionListener);
+		controller.addListener(leapMotionListener);
 
 		// Keep this process running until Enter is pressed
 		System.out.println("Press Enter to quit...");
@@ -34,6 +34,6 @@ public class Main {
 		}
 
 		// Remove the sample listener when done
-		controller.removeListener(magickaLeapMotionListener);
+		controller.removeListener(leapMotionListener);
 	}
 }
