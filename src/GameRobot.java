@@ -6,9 +6,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MagickaRobot {
+public class GameRobot {
 	
-	public MagickaRobot() throws AWTException, IOException {
+	public GameRobot() throws AWTException, IOException {
 		String magickaPathError = "Magicka.exe was not found ! Please copy the path to the Magicka.exe program in the file 'magicka_path.txt'";
 		
 		List<String> lines = new ArrayList<String>();

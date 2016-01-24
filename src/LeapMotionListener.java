@@ -2,9 +2,9 @@ import java.awt.event.KeyEvent;
 
 import com.leapmotion.leap.*;
 
-public class MagickaLeapMotionListener extends Listener {
+public class LeapMotionListener extends Listener {
 	
-	public MagickaLeapMotionListener(MagickaRobot magickaRobot, PoseManager poseManager) {
+	public LeapMotionListener(GameRobot magickaRobot, PoseManager poseManager) {
 		this.magickaRobot = magickaRobot;
 		this.poseManager = poseManager;
 	}
@@ -43,7 +43,7 @@ public class MagickaLeapMotionListener extends Listener {
     	capturePose = true;
     }
     
-    private MagickaRobot magickaRobot;
+    private GameRobot magickaRobot;
     private boolean capturePose;
     private PoseManager poseManager;
 }

@@ -2,7 +2,7 @@ import java.awt.AWTException;
 import java.io.IOException;
 import com.leapmotion.leap.*;
 
-public class MagickaLeapMotion {
+public class Main {
 
 	public static void main(String[] args) throws AWTException, IOException {
 		PoseManager poseManager = new PoseManager();
@@ -11,10 +11,10 @@ public class MagickaLeapMotion {
 		new Interface(poseManager);
 		
 		// Launch the robot and the game
-		MagickaRobot magickaRobot = new MagickaRobot();
+		GameRobot magickaRobot = new GameRobot();
 
 		// Create a sample listener and controller
-		MagickaLeapMotionListener magickaLeapMotionListener = new MagickaLeapMotionListener(magickaRobot, poseManager);
+		LeapMotionListener magickaLeapMotionListener = new LeapMotionListener(magickaRobot, poseManager);
 		Controller controller = new Controller();
 		
 		poseManager.setMagickaLeapMotionListener(magickaLeapMotionListener);
