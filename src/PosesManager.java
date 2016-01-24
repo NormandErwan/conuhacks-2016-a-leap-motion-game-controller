@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class PoseManager {
+public class PosesManager {
 	
 	public static Double matchThreshold = 0.70; 
 	
@@ -33,7 +33,7 @@ public class PoseManager {
 		return keyPoseDetected;
 	}
 	
-	private Integer newPoseKey; // remember when asked by the interface
+	private Integer newPoseKey; // Remember when asked by the interface
 	private LeapMotionListener leapMotionListener;
 	private Map<Integer, Pose> keyPoses;
 }

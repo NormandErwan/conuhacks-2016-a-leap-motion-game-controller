@@ -4,9 +4,9 @@ import com.leapmotion.leap.Listener;
 
 public class LeapMotionListener extends Listener {
 	
-	public static Integer poseDetectedDelay = 300; // milliseconds
+	public static Integer poseDetectedDelay = 350; // milliseconds
 	
-	public LeapMotionListener(GameRobot gameRobot, PoseManager poseManager) {
+	public LeapMotionListener(GameRobot gameRobot, PosesManager poseManager) {
 		this.gameRobot = gameRobot;
 		this.capturePose = false;
 		this.poseManager = poseManager;
@@ -20,8 +20,6 @@ public class LeapMotionListener extends Listener {
     	// Capture new pose
     	if (capturePose == true) {
     		capturePose = false;
-    		
-    		// Get the new pose
     		Pose pose = new Pose(frame);
     		poseManager.createNewPose(pose);
     	}
@@ -52,7 +50,7 @@ public class LeapMotionListener extends Listener {
     
     private GameRobot gameRobot;
     private Boolean capturePose; // Flag for next frame (onFrame method)
-    private PoseManager poseManager;
+    private PosesManager poseManager;
     
     private Integer lastFramePoseKey;
     private long poseDetectionStartTime;

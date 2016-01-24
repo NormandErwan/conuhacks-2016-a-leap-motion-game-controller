@@ -13,7 +13,7 @@ public class Pose {
 		this.fingerVectors = new ArrayList<Vector>();
 		
 		// Get finger relative position and directions
-		Hand rightHand = frame.hands().rightmost(); // TODO : need to choose which one
+		Hand rightHand = frame.hands().rightmost();
 
 	    Vector handXBasis =  rightHand.palmNormal().cross(rightHand.direction()).normalized();
 	    Vector handYBasis = rightHand.palmNormal().opposite();

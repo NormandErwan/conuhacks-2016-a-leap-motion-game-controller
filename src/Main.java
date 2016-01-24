@@ -5,35 +5,28 @@ import com.leapmotion.leap.*;
 public class Main {
 
 	public static void main(String[] args) throws AWTException, IOException {
-		PoseManager poseManager = new PoseManager();
-
-		// Launch the robot and the game
+		PosesManager posesManager = new PosesManager();
 		GameRobot gameRobot = new GameRobot();
+		new GUI(posesManager, gameRobot);
+		LeapMotionListener leapMotionListener = new LeapMotionListener(gameRobot, posesManager);
 		
-		//Launch the GUI
-		new Interface(poseManager, gameRobot);
+		posesManager.setLeapMotionListener(leapMotionListener);
 
-		// Create a sample listener and controller
-		LeapMotionListener leapMotionListener = new LeapMotionListener(gameRobot, poseManager);
+		// Create the Leap Motion controller, which can run in background
 		Controller controller = new Controller();
-		
-		poseManager.setLeapMotionListener(leapMotionListener);
-
-		// Allow to get frame when the application is in background
 		controller.setPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
-
-		// Have the sample listener receive events from the controller
+		
+		// Connect to the Leap Motion
 		controller.addListener(leapMotionListener);
 
 		// Keep this process running until Enter is pressed
-		System.out.println("Press Enter to quit...");
 		try {
 			System.in.read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		// Remove the sample listener when done
+		// Disconnect from the Leap Motion
 		controller.removeListener(leapMotionListener);
 	}
 }
