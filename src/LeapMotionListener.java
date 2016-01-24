@@ -4,9 +4,14 @@ import com.leapmotion.leap.Listener;
 
 public class LeapMotionListener extends Listener {
 	
+	public static Integer poseDetectedDelay = 300; // milliseconds
+	
 	public LeapMotionListener(GameRobot gameRobot, PoseManager poseManager) {
 		this.gameRobot = gameRobot;
+		this.capturePose = false;
 		this.poseManager = poseManager;
+		this.lastFramePoseKey = null;
+		this.poseDetectionStartTime = 0;
 	}
 	
     public void onFrame(Controller controller) {
@@ -20,12 +25,24 @@ public class LeapMotionListener extends Listener {
     		Pose pose = new Pose(frame);
     		poseManager.createNewPose(pose);
     	}
-    	else { // Or Match poses
+    	else { // Or detect a pose
     		Pose pose = new Pose(frame);
     		Integer poseKey = poseManager.poseDetection(pose);
+    		
+    		// Send the command if the same pose is detected during the poseDetectedDelay
     		if (poseKey != null) {
-    			gameRobot.sendKey(poseKey);
+    			if (lastFramePoseKey == poseKey) {
+    				long delay = System.currentTimeMillis() - poseDetectionStartTime;
+    				if (delay >= poseDetectedDelay) {
+        				gameRobot.sendKey(poseKey);
+        				poseDetectionStartTime = System.currentTimeMillis();
+    				}
+    			}
+    			else {
+    				poseDetectionStartTime = System.currentTimeMillis();
+    			}
     		}
+    		lastFramePoseKey = poseKey;
     	}
     }
     
@@ -34,6 +51,9 @@ public class LeapMotionListener extends Listener {
     }
     
     private GameRobot gameRobot;
-    private Boolean capturePose;
+    private Boolean capturePose; // Flag for next frame (onFrame method)
     private PoseManager poseManager;
+    
+    private Integer lastFramePoseKey;
+    private long poseDetectionStartTime;
 }

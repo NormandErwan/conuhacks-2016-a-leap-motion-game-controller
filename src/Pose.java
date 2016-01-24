@@ -32,8 +32,9 @@ public class Pose {
 	}
 	
 	public Double match(Pose pose) {
-		Double minMatch = -1.0;
+		Double minMatch = 1.0;
 		
+		// Normalize each vector, do the dot product, and keep the lowest result
 		for (int i = 0, s = fingerVectors.size(); i < s; i++) {
 			Double matchi = (double) fingerVectors.get(i).normalized().dot(pose.getFingerVectors().get(i).normalized());
 			minMatch = Math.min(matchi, minMatch);

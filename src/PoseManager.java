@@ -12,7 +12,6 @@ public class PoseManager {
 	}
 	
 	public void prepareNewPose(int key) {
-		System.out.println(key);
 		newPoseKey = key;
 		leapMotionListener.setTrueCapturePose();
 	}
@@ -22,13 +21,13 @@ public class PoseManager {
 		newPoseKey = null;
 	}
 	
-	public int poseDetection(Pose pose) {
+	public Integer poseDetection(Pose pose) {
 		Integer keyPoseDetected = null;
 		for (Map.Entry<Integer, Pose> entry : keyPoses.entrySet()) {
 			Double matchValue = entry.getValue().match(pose);
-			System.out.println(matchValue);
 			if (matchValue >= matchThreshold) {
 				keyPoseDetected = entry.getKey();
+				break;
 			}
 		}
 		return keyPoseDetected;
