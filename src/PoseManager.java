@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class PoseManager {
 	
-	public static Double matchThreshold = 0.90; 
+	public static Double matchThreshold = 0.70; 
 	
 	public void setLeapMotionListener(LeapMotionListener leapMotionListener) {
 		this.newPoseKey = null;
