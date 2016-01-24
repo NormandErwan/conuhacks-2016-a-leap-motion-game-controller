@@ -32,7 +32,6 @@ public class GameRobot {
 	}
 	
 	public void sendKey(int keyEvent) {
-		System.out.println("Send " + keyEvent);
 		robot.keyPress(keyEvent);
         robot.delay(100);
         robot.keyRelease(keyEvent);

@@ -17,8 +17,7 @@ public class LeapMotionListener extends Listener {
     		capturePose = false;
     		
     		// Get the new pose
-    		Pose pose = new Pose();
-    		
+    		Pose pose = new Pose(frame.hands());
     		poseManager.createFuturePose(pose);
     	}
     	else { // Or Match poses
