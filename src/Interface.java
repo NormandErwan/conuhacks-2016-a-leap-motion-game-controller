@@ -11,8 +11,11 @@ import javax.swing.*;
 public class Interface extends JFrame {
     private JFrame frame = new JFrame();
     private JPanel mainPanel = new JPanel();
-
+    private String pathGame;
+    private char[] tabKey;
+    private JTextField varGame;
     Interface(){
+	
 	bot();
 
 	initUI();
@@ -30,7 +33,26 @@ public class Interface extends JFrame {
 	frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	frame.setVisible(true);
     }
+    /*public void mid(){
+	FlowLayout midPanel = new JPanel();
+	varGame = new JTextField();
+	
+	mainPanel.add(midPanel, BorderLayout.CENTER);
+	mid
+	
+	varGame.addActionListener(new listenerChoiceVarGame());
 
+    }
+    public class listenerChoiceVarGame implements ActionListener {
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	  
+	    tabGesture[0]= new Gesture(varGame.getText().charAt(0));
+	    
+	}
+	
+    }*/
     public void bot(){
 	JPanel botPanel = new JPanel();
 	JButton jouer = new JButton("Jouer");
@@ -40,10 +62,10 @@ public class Interface extends JFrame {
 	botPanel.add(choixJeu);
 	botPanel.add(jouer);
 
-	choixJeu.addActionListener(new listenerChoixJeu());
+	choixJeu.addActionListener(new listenerChoiceOfTheGame());
     }
 
-    public class listenerChoixJeu implements ActionListener {
+    public class listenerChoiceOfTheGame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -52,8 +74,8 @@ public class Interface extends JFrame {
 	    JFileChooser chooser = new JFileChooser();
 	    chooser.showOpenDialog(null);
 	    File file = chooser.getSelectedFile();
-		String fullPath = file.getCanonicalPath();
-		System.out.println(fullPath);
+		pathGame = file.getCanonicalPath();
+
 	    } catch (IOException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
