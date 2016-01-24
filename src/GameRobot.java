@@ -12,7 +12,7 @@ public class GameRobot {
 		String magickaPathError = "Magicka.exe was not found ! Please copy the path to the Magicka.exe program in the file 'magicka_path.txt'";
 		
 		List<String> lines = new ArrayList<String>();
-		try {
+		/*try {
 			lines = Files.readAllLines(Paths.get("magicka_path.txt"));
 		} catch (IOException e1) {
 			throw new IOException(magickaPathError);
@@ -25,8 +25,8 @@ public class GameRobot {
 				Runtime.getRuntime().exec(lines.get(0));
 			} catch (IOException e) {
 				throw new IOException(magickaPathError);
-			}*/
-		}
+			}
+		}*/
 		
 		this.robot = new Robot();
 	}

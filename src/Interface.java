@@ -1,4 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,11 +14,14 @@ public class Interface extends JFrame {
     private JPanel mainPanel = new JPanel();
     private String pathGame;
     private char[] tabKey;
+    private int nbrGestures;
     private JTextField varGame;
-	private PoseManager poseManager;
+    private JTextField JTnbrGesture;
+    private PoseManager poseManager;
 	
     Interface(PoseManager poseManager) {
 		this.poseManager = poseManager;
+		top();
 		
 		bot();
 	
@@ -31,28 +37,62 @@ public class Interface extends JFrame {
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setVisible(true);
     }
-    
-    /*public void mid(){
-	FlowLayout midPanel = new JPanel();
-	varGame = new JTextField();
+    public void top(){
+	JPanel topPanel = new JPanel();
+	frame.add(topPanel, BorderLayout.NORTH);
+	JTnbrGesture = new JTextField("Nombre Gesture");
+	topPanel.add(JTnbrGesture);
 	
-	mainPanel.add(midPanel, BorderLayout.CENTER);
-	mid
-	
-	varGame.addActionListener(new listenerChoiceVarGame());
+	JTnbrGesture.addActionListener(new listenerNbrGesture());
 
     }
-    
+  public class listenerNbrGesture implements ActionListener {
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	  
+	    
+	    nbrGestures = JTnbrGesture.getText().charAt(0)-48; //ascii
+	    System.out.println(nbrGestures);
+	    mid();
+	    //tabKey[0]= varGame.getText().charAt(0);
+	    
+	}
+  }
+    public void mid(){
+	char[] alphabet = new char[]{'q','w','e','r','a','s','d','f'};
+	JFrame frameGesture = new JFrame("Gesture");
+	frameGesture.setSize(1000, 600);
+	frameGesture.setLocationRelativeTo(null);
+	frameGesture.setVisible(true);
+	JPanel midPanel = new JPanel();
+	frameGesture.add(midPanel);
+	GridLayout midGridLayout = new GridLayout(nbrGestures,2);
+	midPanel.setLayout(midGridLayout);
+	midPanel.setPreferredSize(new Dimension(100, 50));
+	for(int i=0; i<nbrGestures; i++){
+	    	varGame = new JTextField(alphabet[i]);
+		JButton button = new JButton("Gesture");
+		midPanel.add(varGame);
+		midPanel.add(button);
+		varGame.addActionListener(new listenerChoiceVarGame());
+	}
+	
+	
+	//varGame.addActionListener(new listenerChoiceVarGame());
+
+    }
     public class listenerChoiceVarGame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	  
-	    tabGesture[0]= new Gesture(varGame.getText().charAt(0));
+	    System.out.println(varGame.getText().charAt(0));
+	    //tabKey[0]= varGame.getText().charAt(0);
 	    
 	}
 	
-    }*/
+    }
     
     public void bot(){
 		JPanel botPanel = new JPanel();
